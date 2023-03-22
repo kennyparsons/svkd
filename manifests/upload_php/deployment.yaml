@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dvka-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dvka
+  template:
+    metadata:
+      labels:
+        app: dvka
+    spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        effect: "NoSchedule"
+      - key: "dedicated"
+        operator: "Equal"
+        value: "dvka"
+        effect: "NoSchedule"
+      containers:
+      - name: dvka
+        image: kennyparsons/dvka
