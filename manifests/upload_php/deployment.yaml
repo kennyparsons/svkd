@@ -21,7 +21,7 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: svkd
-        image: kennyparsons/svkd
+        image: ghcr.io/kennyparsons/svkd
         ports:
         - containerPort: 80  # expose port 80 from the container
 
