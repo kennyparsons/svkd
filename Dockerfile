@@ -1,3 +1,5 @@
+LABEL org.opencontainers.image.source = "https://github.com/kennyparsons/svkd"
+
 # Use an official PHP runtime as a parent image
 FROM php:7.4-apache
 
