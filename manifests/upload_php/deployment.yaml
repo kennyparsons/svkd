@@ -1,24 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dvka-deployment
+  name: svkd-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: dvka
+      app: svkd
   template:
     metadata:
       labels:
-        app: dvka
+        app: svkd
     spec:
       tolerations:
       - key: "node-role.kubernetes.io/master"
         effect: "NoSchedule"
       - key: "dedicated"
         operator: "Equal"
-        value: "dvka"
+        value: "svkd"
         effect: "NoSchedule"
       containers:
-      - name: dvka
-        image: kennyparsons/dvka
+      - name: svkd
+        image: ghcr.io/kennyparsons/svkd
+        ports:
+        - containerPort: 80  # expose port 80 from the container
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svkd-service
+spec:
+  selector:
+    app: svkd  # match the deployment's labels
+  ports:
+  - name: http
+    port: 31001   # expose port 31001 for the service
+    targetPort: 80  # forward traffic to the container's port 80
